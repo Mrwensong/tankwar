@@ -3,7 +3,7 @@ package cn.zimo.enumtype;
  * 
  * 道具枚举类
  *
- */
+ *///
 
 public enum ToolType {
 	/**
