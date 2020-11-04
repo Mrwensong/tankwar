@@ -178,64 +178,7 @@ public class Tank extends DisplayableImage {
 			}
 		}
 		return false;
-	}
-	/**
-	 * 判断是否吃到了道具
-	 * @param x 横坐标
-	 * @param y 纵坐标
-	 * @return 相撞返回true，否则false
-	 */
-	public final boolean hitTool() {
-		Tool tool = gamePanel.getTool();
-		List<Tank> tanks = gamePanel.getPlayerTanks();// 获取所有玩家坦克
-		//System.out.println("hitTool()方法执行");
-		for (int i = 0, lengh = tanks.size(); i < lengh; i++) {// 遍历所有玩家坦克
-			Tank t = tanks.get(i);// 获取tank对象
-			//System.out.println(tool.getRect().toString());
-			if (t.type==TankType.PLAYER1||t.type==TankType.PLAYER2) {// 如果此坦克是玩家坦克1或者是玩家坦克2
-				if (t.isAlive() && t.hit(tool)&&tool.getAlive()) {// 如果此坦克存活并且与道具相撞
-					//System.out.println(t.hit(tool));
-					//System.out.println("碰撞到道具");
-					switch (tool.type) {//根据道具选择对应的效果
-					case ADD_TANK:
-						t.life++;
-						System.out.println("坦克增加道具");
-						break;
-					case STAR:
-						System.out.println("星星道具");
-						t.starNum++;
-						if(t.starNum>3) {
-							t.starNum=3;
-						}
-						//t.addStar();
-						break;
-					case SPADE:
-						System.out.println("钢撬道具");
-						addSpade();
-						break;
-					case TIMER:
-						System.out.println("定时器道具");
-						addTimer();
-						break;
-					case BOMB:
-						System.out.println("爆炸道具");
-						addBomb();
-						break;
-					case GUN:
-						t.starNum=3;
-						//t.addStar();
-						System.out.println("钢枪道具");
-						break;
-					}
-					//t.addToolFunction();
-					tool.setAlive(false);// 让道具消失
-					return true;// 返回true
-				}
-			}
-		}
-		return false;
-	}
-	/**
+	}/**
 	 * 吃到爆炸道具
 	 */
 	private void addBomb() {
