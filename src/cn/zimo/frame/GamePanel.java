@@ -23,7 +23,6 @@ import cn.zimo.model.Bullet;
 import cn.zimo.model.Level;
 import cn.zimo.model.Map;
 import cn.zimo.model.Tank;
-import cn.zimo.model.Tool;
 import cn.zimo.model.wall.BaseWall;
 import cn.zimo.model.wall.Wall;
 import cn.zimo.util.AudioPlayer;
@@ -64,9 +63,6 @@ public class GamePanel extends JPanel implements KeyListener {
 	private int createBotTimer = 0;// 创建电脑坦克计时器
 	private Tank survivor;// （玩家）幸存者,用于绘制最后一个爆炸效果
 	private List<AudioClip> audios=AudioUtil.getAudios();// 所有背景音效的集合
-	private Tool tool=Tool.getToolInstance(r.nextInt(500), r.nextInt(500));
-	private int toolTimer=0;// 道具出现的计时器
-	private int pauseTimer=0;// 电脑坦克暂停计时器
 	/**
 	 * 游戏面板构造方法
 	 * 
@@ -167,7 +163,6 @@ public class GamePanel extends JPanel implements KeyListener {
 		allTanks.addAll(botTanks);// 坦克集合添加电脑坦克集合
 		panitWalls();// 绘制墙块
 		panitBullets();// 绘制子弹
-		paintTool();// 绘制道具
 		
 		if (botSurplusCount == 0) {// 如果所有电脑都被消灭
 			stopThread();// 结束游戏帧刷新线程
@@ -208,20 +203,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		}
 		g.drawImage(base.getImage(), base.x, base.y, this);// 绘制基地
 	}
-	/**
-	 * 绘制道具
-	 */
-	private void paintTool() {
-		if(toolTimer>=4500) {
-			toolTimer=0;// 重新计时
-			tool.changeToolType();
-		}else {
-			toolTimer+=FRESHTIME;
-		}
-		if(tool.getAlive()) {
-			tool.draw(g);
-		}
-	}
+	
 	/**
 	 * 在屏幕顶部绘制剩余坦克数量
 	 */
@@ -304,13 +286,7 @@ public class GamePanel extends JPanel implements KeyListener {
 				if(!t.isPause()) {//如果电脑坦克不处于暂停状态
 					t.go();// 电脑坦克展开行动	
 				} 
-				if(t.isPause()) {// 电脑坦克处于暂停状态
-					if(pauseTimer>2500) {// 如果暂停时间大于2.5秒
-						t.setPause(false);// 解除暂停状态
-						pauseTimer=0;// 下一次暂停状态重新计时
-					}
-					pauseTimer+=FRESHTIME;// 暂停时间开始累积
-				}
+				
 				g.drawImage(t.getImage(), t.x, t.y, this);// 绘制坦克
 			} else {// 如果坦克阵亡
 				botTanks.remove(i);// 集合中删除此坦克
@@ -328,7 +304,6 @@ public class GamePanel extends JPanel implements KeyListener {
 		for (int i = 0; i < playerTanks.size(); i++) {// 循环遍历玩家坦克
 			Tank t = playerTanks.get(i);// 获取玩家坦克对象
 			if (t.isAlive()) {// 如果坦克存活
-				t.hitTool();//判断是否碰撞到道具
 				t.addStar();
 				g.drawImage(t.getImage(), t.x,t.y, this);// 绘制坦克
 			} else {// 如果坦克阵亡
@@ -622,13 +597,7 @@ public class GamePanel extends JPanel implements KeyListener {
 	public List<Tank> getBotTanks(){
 		return botTanks;
 	}
-	/**
-	 * 获取到游戏面板的道具对象
-	 * @return
-	 */
-	public Tool getTool() {
-		return tool;
-	}
+	
 	/**
 	 * 游戏结束跳转线程
 	 */
