@@ -184,9 +184,6 @@ public class MapEditorPanel extends JPanel implements MouseListener{
 			}else if(clickedPoint.y>40&&clickedPoint.y<60) {
 				wallType=WallType.IRON;
 				setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-			}else if(clickedPoint.y>60&&clickedPoint.y<80) {
-				wallType=WallType.RIVER;
-				setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 			}else if(clickedPoint.y>80&&clickedPoint.y<100) {
 				wallType=null;
 				setCursor(new Cursor(Cursor.HAND_CURSOR));
