@@ -84,28 +84,5 @@ public class ImageUtil {
 	 * 登陆面板背景图片路径
 	 */
 	public static final String LOGIN_BACKGROUD_IMAGE_URL = "image/login_background.png";
-	/**
-	 * 定时器道具图片路径
-	 */
-	public static final String TIMER_URL="image/tool/01.png";
-	/**
-	 * 铁锹道具图片路径
-	 */
-	public static final String SPADE_URL="image/tool/02.png";
-	/**
-	 * 新增坦克道具图片路径
-	 */
-	public static final String ADD_TANK_URL="image/tool/03.png";
-	/**
-	 * 炸弹道具图片路径
-	 */
-	public static final String BOMB_URL="image/tool/04.png";
-	/**
-	 * 星星道具图片路径
-	 */
-	public static final String STAR_URL="image/tool/05.png";
-	/**
-	 * 钢枪道具图片路径
-	 */
-	public static final String GUN_URL="image/tool/06.png";
+	
 }

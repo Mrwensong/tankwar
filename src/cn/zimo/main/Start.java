@@ -4,8 +4,6 @@ import cn.zimo.frame.MainFrame;
 
 /**
  * Æô¶¯Àà
- * 
- * @author ×ÓÄ«
  */
 public class Start {
 	public static void main(String[] args) {
