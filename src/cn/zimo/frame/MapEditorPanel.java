@@ -24,7 +24,6 @@ import cn.zimo.model.wall.BaseWall;
 import cn.zimo.model.wall.BrickWall;
 import cn.zimo.model.wall.GrassWall;
 import cn.zimo.model.wall.IronWall;
-import cn.zimo.model.wall.RiverWall;
 import cn.zimo.model.wall.Wall;
 import cn.zimo.util.ImageUtil;
 import cn.zimo.util.MapIO;
@@ -125,14 +124,7 @@ public class MapEditorPanel extends JPanel implements MouseListener{
 		
 		// 画一个擦子
 		g.setColor(Color.MAGENTA);
-//		g.drawLine(762, 80, 762, 100);
-//		g.drawLine(762, 80, 782, 80);
-//		g.drawLine(782, 80, 782, 100);
-//		g.drawLine(762, 100, 782, 100);
 		g.drawRect(762, 80, 20, 19);
-		//g.fillRect(762, 80, 20, 19);
-		
-		//画出地图
 		paintWalls();
 	}
 	/**
@@ -222,13 +214,6 @@ public class MapEditorPanel extends JPanel implements MouseListener{
 					repaint();
 				}
 			}
-			//下面这样写会抛异常，这是个高级异常，这个异常叫做并发修改异常
-//			for(Wall w:walls) {
-//				if(w.x==p.x&&w.y==p.y) {
-//					walls.remove(w);
-//					repaint();
-//				}
-//			}
 			if(wallType!=null) {//如果墙块类型不为空，添加墙块
 				addWall(wallType, p);
 			}
@@ -266,16 +251,7 @@ public class MapEditorPanel extends JPanel implements MouseListener{
 			}
 			walls.add(iron);
 			break;
-		case RIVER:
-			RiverWall river=new RiverWall(p.x, p.y);
-			for(int i=0;i<walls.size();i++) {
-				Wall w=walls.get(i);
-				if(w.equals(river)) {
-					walls.remove(w);
-				}
-			}
-			walls.add(river);
-			break;
+		
 		default:
 			break;
 		}

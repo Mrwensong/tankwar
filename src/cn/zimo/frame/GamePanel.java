@@ -76,13 +76,8 @@ public class GamePanel extends JPanel implements KeyListener {
 	public GamePanel(MainFrame frame, int level, GameType gameType) {
 		this.frame = frame;
 		frame.setSize(775, 600);
-		//this.setSize(775, 600);
 		this.level = level;
 		this.gameType = gameType;
-		//System.out.println(this.level+","+level);
-//		if(this.level!=1) {
-//			botCount+=level*10;
-//		}
 		setBackground(Color.BLACK);// 面板使用黑色背景
 		init();// 初始化组件
 		Thread t = new FreshThead();// 创建游戏帧刷新线程，这一步很重要，不创建的话游戏会卡住
@@ -304,7 +299,6 @@ public class GamePanel extends JPanel implements KeyListener {
 		for (int i = 0; i < playerTanks.size(); i++) {// 循环遍历玩家坦克
 			Tank t = playerTanks.get(i);// 获取玩家坦克对象
 			if (t.isAlive()) {// 如果坦克存活
-				t.addStar();
 				g.drawImage(t.getImage(), t.x,t.y, this);// 绘制坦克
 			} else {// 如果坦克阵亡
 				//TankType type=t.getTankType();

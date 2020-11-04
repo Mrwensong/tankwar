@@ -16,7 +16,6 @@ import cn.zimo.frame.MapEditorPanel;
 import cn.zimo.model.wall.BrickWall;
 import cn.zimo.model.wall.GrassWall;
 import cn.zimo.model.wall.IronWall;
-import cn.zimo.model.wall.RiverWall;
 import cn.zimo.model.wall.Wall;
 
 /**
@@ -75,8 +74,6 @@ public class MapIO {
 					grassBuffer.append(w.x+","+w.y+";");
 				}else if(w instanceof IronWall) {
 					ironBuffer.append(w.x+","+w.y+";");
-				}else if(w instanceof RiverWall) {
-					riverBuffer.append(w.x+","+w.y+";");
 				}
 			}
 		}
@@ -172,14 +169,6 @@ public class MapIO {
 				String axes[] = wStr.split(",");// 使用“,”分割字符串
 				// 创建墙块对象，分割的第一个值为横坐标，分割的第二个值为纵坐标
 				wall = new BrickWall(Integer.parseInt(axes[0]), Integer.parseInt(axes[1]));// 在此坐标上创建砖墙对象
-				w.add(wall);// 集合中添加此墙块
-			}
-			break;
-		case RIVER:// 如果是河流
-			for (String wStr : walls) {// 遍历分割结果
-				String axes[] = wStr.split(",");// 使用“,”分割字符串
-				// 创建墙块对象，分割的第一个值为横坐标，分割的第二个值为纵坐标
-				wall = new RiverWall(Integer.parseInt(axes[0]), Integer.parseInt(axes[1]));// 在此坐标上创建河流对象
 				w.add(wall);// 集合中添加此墙块
 			}
 			break;
