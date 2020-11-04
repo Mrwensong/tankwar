@@ -31,7 +31,6 @@ public class Tank extends DisplayableImage {
 	private String leftImage;// 向左移动时的图片
 	
 	private int life=1;//生命数
-	private int starNum=0;//吃到的道具星星，吃一颗就加快攻击速度，累积三颗就可以打掉钢墙
 	/**
 	 * 坦克构造方法
 	 * 
@@ -178,72 +177,8 @@ public class Tank extends DisplayableImage {
 			}
 		}
 		return false;
-	}/**
-	 * 吃到爆炸道具
-	 */
-	private void addBomb() {
-		List<Tank> botTanks=gamePanel.getBotTanks();
-		for(int i=0;i<botTanks.size();i++) {
-			BotTank b=(BotTank) botTanks.get(i);
-			b.setAlive(false);
-		}
 	}
- //
-	/**
-	 * 坦克吃到定时器道具
-	 */
-	private void addTimer() {
-		List<Tank> botTanks=gamePanel.getBotTanks();
-		for(int i=0;i<botTanks.size();i++) {
-			BotTank b=(BotTank) botTanks.get(i);
-			b.setPause(true);
-		}
-	}
-
-	/**
-	 * 坦克吃到星星道具
-	 */
-	public void addStar() {
-		if(starNum==1) {
-			this.setAttackCoolDownTime(400);
-			//System.out.println(attackCoolDownTime+","+starNum);
-		}
-		if(starNum==2) {
-			this.setAttackCoolDownTime(300);
-			//System.out.println(attackCoolDownTime+","+starNum);
-		}
-		if(starNum==3) {
-			this.setAttackCoolDownTime(250);
-			//System.out.println(attackCoolDownTime+","+starNum);
-			//设置可以打掉钢砖
-			List<Bullet> bullets=gamePanel.getBullets();
-			for(int i=0;i<bullets.size();i++) {
-				Bullet b=bullets.get(i);
-				if(b.isAlive()&&b.owner==type) {
-					b.setIsHitIronWall(true);
-				}
-			}
-		}
-	}
-
-	/**
-	 * 坦克吃到钢撬道具
-	 */
-	private void addSpade() {
-		List<Wall> walls=gamePanel.getWalls();
-		// 基地砖墙
-		for (int a = 340; a <= 400; a += 20) {// 循环基地砖墙的横坐标
-			for (int b = 500; b <= 560; b += 20) {// 循环基地砖墙的纵坐标
-				if (a >= 360 && a <= 380 && b >= 520) {// 如果墙块与基地发生重合
-					continue;// 执行下一次循环
-				} else {
-					walls.add(new IronWall(a, b));// 墙块集合中添加钢砖
-				}
-			}
-		}
-		
-	}
-
+ 
 	/**
 	 * 移动到面板的边界
 	 */

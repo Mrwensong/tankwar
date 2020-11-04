@@ -66,8 +66,6 @@ public class AudioPlayer{
 	}
 	/**
 	 * 内部类实现播放音乐线程
-	 * @author 子墨
-	 *
 	 */
 	public class AudioThread extends Thread{
 		@Override
