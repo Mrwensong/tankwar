@@ -188,7 +188,7 @@ public class Tank extends DisplayableImage {
 			b.setAlive(false);
 		}
 	}
-
+ //
 	/**
 	 * 坦克吃到定时器道具
 	 */
