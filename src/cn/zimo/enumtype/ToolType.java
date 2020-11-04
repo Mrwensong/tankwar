@@ -4,7 +4,7 @@ package cn.zimo.enumtype;
  * 道具枚举类
  *
  *//
-//testl
+//testl、、
 public enum ToolType {
 	/**
 	 * 增加坦克道具
