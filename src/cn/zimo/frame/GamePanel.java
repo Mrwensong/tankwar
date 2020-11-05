@@ -48,7 +48,7 @@ public class GamePanel extends JPanel implements KeyListener {
 	private int level=Level.previsousLevel();// 关卡值
 	private List<Bullet> bullets;// 所有子弹集合
 	private volatile List<Tank> allTanks;// 所有坦克集合
-	private List<Tank> botTanks;// 电脑坦克集合
+	private List<Tank> botTanks;// 电脑坦克集合、
 	private int botCount = 20+level;// 电脑坦克总数
 	private int botReadyCount = botCount;// 准备出场的电脑坦克总数
 	private int botSurplusCount = botCount;// 电脑坦克剩余量
