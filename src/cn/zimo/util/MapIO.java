@@ -16,13 +16,11 @@ import cn.zimo.frame.MapEditorPanel;
 import cn.zimo.model.wall.BrickWall;
 import cn.zimo.model.wall.GrassWall;
 import cn.zimo.model.wall.IronWall;
-import cn.zimo.model.wall.RiverWall;
 import cn.zimo.model.wall.Wall;
 
 /**
  * 地图数据工具类
  */
-
 public class MapIO {
 	// 地图数据文件路径
 	public final static String DATA_PATH = "map/data/";
@@ -34,7 +32,6 @@ public class MapIO {
 	public final static String IMAGE_SUFFIX = ".png";
 	/**
 	 * 获取指定名称地图的所有墙块集合
-	 *
 	 * @param mapName
 	 * @return
 	 */
@@ -55,15 +52,12 @@ public class MapIO {
 	/**
 	 * 写出墙块集合到指定文件夹中
 	 * @param file 
-	 * 				文件对象
 	 * @return 
-	 * 				其实不需要返回值，返回boolean类型只是为了方便测试结果是否正确
 	 */
 	public static boolean writeMap(File file) {
 		StringBuffer brickBuffer=new StringBuffer("BRICK=");//保存所有砖墙的坐标
 		StringBuffer grassBuffer=new StringBuffer("GRASS=");//保存所有草地的坐标
 		StringBuffer ironBuffer=new StringBuffer("IRON=");//保存所有钢砖的坐标
-		StringBuffer riverBuffer=new StringBuffer("RIVER=");//保存所有河流的坐标
 		List<Wall> walls=MapEditorPanel.walls;//获取到地图编辑器面板中所有墙块的集合
 		//遍历集合，判断每个墙块坐标应该追加到哪种类型墙块后面
 		for(int i=0;i<walls.size();i++) {
@@ -75,8 +69,6 @@ public class MapIO {
 					grassBuffer.append(w.x+","+w.y+";");
 				}else if(w instanceof IronWall) {
 					ironBuffer.append(w.x+","+w.y+";");
-				}else if(w instanceof RiverWall) {
-					riverBuffer.append(w.x+","+w.y+";");
 				}
 			}
 		}
@@ -99,11 +91,6 @@ public class MapIO {
 				writer.newLine();
 				writer.flush();
 			}
-			if(!riverBuffer.toString().equals("RIVER=")) {
-				writer.write(riverBuffer.toString().toCharArray());
-				writer.newLine();
-				writer.flush();
-			}
 			if(writer!=null) {//如果流对象不为空，关闭流
 				writer.close();
 			}
@@ -111,7 +98,7 @@ public class MapIO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		} 
+		} //
 		return true;
 	}
 	/**
@@ -130,16 +117,12 @@ public class MapIO {
 			pro.load(new FileInputStream(file));// 属性集对象读取地图文件
 			String brickStr = (String) pro.get(WallType.BRICK.name());// 读取地图文件中砖墙名称属性的字符串数据
 			String grassStr = (String) pro.get(WallType.GRASS.name());// 读取地图文件中草地名称属性的字符串数据
-			String riverStr = (String) pro.get(WallType.RIVER.name());// 读取地图文件中河流名称属性的字符串数据
 			String ironStr = (String) pro.get(WallType.IRON.name());// 读取地图文件中铁墙名称属性的字符串数据
 			if (brickStr != null) {// 如果读取的砖墙数据不是null
 				walls.addAll(readWall(brickStr, WallType.BRICK));// 解析数据，并将数据中解析出的墙块集合添加到总墙块集合中
 			}
 			if (grassStr != null) {// 如果读取的草地数据不是null
 				walls.addAll(readWall(grassStr, WallType.GRASS));// 解析数据，并将数据中解析出的墙块集合添加到总墙块集合中
-			}
-			if (riverStr != null) {// 如果读取的河流数据不是null
-				walls.addAll(readWall(riverStr, WallType.RIVER));// 解析数据，并将数据中解析出的墙块集合添加到总墙块集合中
 			}
 			if (ironStr != null) {// 如果读取的铁墙数据不是null
 				walls.addAll(readWall(ironStr, WallType.IRON));// 解析数据，并将数据中解析出的墙块集合添加到总墙块集合中
@@ -172,14 +155,6 @@ public class MapIO {
 				String axes[] = wStr.split(",");// 使用“,”分割字符串
 				// 创建墙块对象，分割的第一个值为横坐标，分割的第二个值为纵坐标
 				wall = new BrickWall(Integer.parseInt(axes[0]), Integer.parseInt(axes[1]));// 在此坐标上创建砖墙对象
-				w.add(wall);// 集合中添加此墙块
-			}
-			break;
-		case RIVER:// 如果是河流
-			for (String wStr : walls) {// 遍历分割结果
-				String axes[] = wStr.split(",");// 使用“,”分割字符串
-				// 创建墙块对象，分割的第一个值为横坐标，分割的第二个值为纵坐标
-				wall = new RiverWall(Integer.parseInt(axes[0]), Integer.parseInt(axes[1]));// 在此坐标上创建河流对象
 				w.add(wall);// 集合中添加此墙块
 			}
 			break;

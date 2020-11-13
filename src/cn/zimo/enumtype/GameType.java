@@ -1,16 +1,10 @@
 package cn.zimo.enumtype;
 
 /**
- * 游戏模式枚举
+ * 单人模式，双人模式
  */
 public enum GameType {
-	/**
-	 * 单人游戏
-	 */
-	ONE_PLAYER,
-	/**
-	 * 双人游戏
-	 */
-	TWO_PLAYER,
+	
+	ONE_PLAYER,TWO_PLAYER,
 	
 }

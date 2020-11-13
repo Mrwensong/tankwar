@@ -11,7 +11,6 @@ import cn.zimo.model.wall.BaseWall;
 import cn.zimo.model.wall.BrickWall;
 import cn.zimo.model.wall.GrassWall;
 import cn.zimo.model.wall.IronWall;
-import cn.zimo.model.wall.RiverWall;
 import cn.zimo.model.wall.Wall;
 import cn.zimo.util.AudioPlayer;
 import cn.zimo.util.AudioUtil;
@@ -189,13 +188,7 @@ public class Bullet extends DisplayableImage {
 					}
 					new AudioPlayer(AudioUtil.HIT).new AudioThread().start();
 				}
-				if(w instanceof RiverWall) {
-					if(this.isHitIronWall) {
-						this.dispose();
-						w.setAlive(false);
-					}
-					//new AudioPlayer(AudioUtil.HIT).new AudioThread().start();
-				}
+				
 				if(w instanceof GrassWall) {
 					if(this.isHitIronWall) {
 						this.dispose();

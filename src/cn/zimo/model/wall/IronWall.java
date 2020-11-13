@@ -1,7 +1,6 @@
 package cn.zimo.model.wall;
 
 import cn.zimo.util.ImageUtil;
-
 /**
  * ÌúÇ½
  */

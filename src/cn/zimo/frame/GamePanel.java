@@ -48,8 +48,8 @@ public class GamePanel extends JPanel implements KeyListener {
 	private int level=Level.previsousLevel();// 关卡值
 	private List<Bullet> bullets;// 所有子弹集合
 	private volatile List<Tank> allTanks;// 所有坦克集合
-	private List<Tank> botTanks;// 电脑坦克集合
-	private static final int botCount = 30;// 电脑坦克总数
+	private List<Tank> botTanks;// 电脑坦克集合、
+	private int botCount = 20+level;// 电脑坦克总数
 	private int botReadyCount = botCount;// 准备出场的电脑坦克总数
 	private int botSurplusCount = botCount;// 电脑坦克剩余量
 	private int botMaxInMap = 6;// 场上最大电脑坦克数
@@ -76,13 +76,8 @@ public class GamePanel extends JPanel implements KeyListener {
 	public GamePanel(MainFrame frame, int level, GameType gameType) {
 		this.frame = frame;
 		frame.setSize(775, 600);
-		//this.setSize(775, 600);
 		this.level = level;
 		this.gameType = gameType;
-		//System.out.println(this.level+","+level);
-//		if(this.level!=1) {
-//			botCount+=level*10;
-//		}
 		setBackground(Color.BLACK);// 面板使用黑色背景
 		init();// 初始化组件
 		Thread t = new FreshThead();// 创建游戏帧刷新线程，这一步很重要，不创建的话游戏会卡住
@@ -304,7 +299,6 @@ public class GamePanel extends JPanel implements KeyListener {
 		for (int i = 0; i < playerTanks.size(); i++) {// 循环遍历玩家坦克
 			Tank t = playerTanks.get(i);// 获取玩家坦克对象
 			if (t.isAlive()) {// 如果坦克存活
-				t.addStar();
 				g.drawImage(t.getImage(), t.x,t.y, this);// 绘制坦克
 			} else {// 如果坦克阵亡
 				//TankType type=t.getTankType();

@@ -69,8 +69,6 @@ public class LoginPanel extends JPanel implements KeyListener {
 		g.setColor(Color.BLACK);// 使用黑色
 		g.drawString("单人游戏模式", 300, 300);// 绘制第一行文字
 		g.drawString("双人游戏模式", 300, 360);// 绘制第二行文字
-		g.drawString("预览关卡地图", 300, 420);// 绘制第三行文字
-		g.drawString("自定义地图模式", 300, 480);// 绘制第四行文字
 		
 		g.drawImage(tank, 260, tankY, this);// 绘制坦克图标
 	}
@@ -130,16 +128,7 @@ public class LoginPanel extends JPanel implements KeyListener {
 				type = GameType.TWO_PLAYER;// 游戏模式为双人模式
 				gotoLevelPanel();// 跳转关卡面板
 			}
-			if(tankY == y4){
-				type = null;
-				frame.removeKeyListener(this);//这里一定要把键盘监听移除掉，否则会自动触发
-				frame.setPanel(new MapEditorPanel(frame));
-			}
-			if(tankY == y3)	{
-				type=null;
-				frame.removeKeyListener(this);
-				frame.setPanel(new MapPreViewPanel(frame));
-			}
+			
 		}
 		
 	}

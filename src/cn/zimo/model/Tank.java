@@ -8,7 +8,6 @@ import cn.zimo.enumtype.Direction;
 import cn.zimo.enumtype.TankType;
 import cn.zimo.frame.GamePanel;
 import cn.zimo.model.wall.GrassWall;
-import cn.zimo.model.wall.IronWall;
 import cn.zimo.model.wall.Wall;
 import cn.zimo.util.AudioPlayer;
 import cn.zimo.util.AudioUtil;
